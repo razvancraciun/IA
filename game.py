@@ -1,5 +1,3 @@
-import random
-
 class Missionaries_and_canibals:
     def __init__(self, n_missionaries, n_cannibals, boat_size):
         self.boat_size = boat_size
@@ -13,6 +11,7 @@ class Missionaries_and_canibals:
     def is_valid_transition(self, state,  moved_m, moved_c):
         new_state = self.transition(state, moved_m, moved_c)
         (nm1, nc1, boat_pos, nm2, nc2) = new_state
+
         # people on each shore
         if (nm1 > 0 and nc1 > nm1) \
          or (nm2 > 0 and nc2 > nm2):
@@ -57,34 +56,11 @@ class Missionaries_and_canibals:
                         states.append(transition)
         return states
 
+    def reset(self):
+        self.state = self.initial_state
+
     def game_over(self):
         if self.state == self.final_state:
             print('You win!')
         else:
             print('You lose')
-
-
-class Random_Strategy:
-    def __init__(self, game):
-        self.visited = []
-        self.game = game
-
-    def run(self):
-        self.initialize()
-        print(f'Starting game. State: {self.game.state}')
-        step = 0
-        while not self.game.is_final_state() and step < 100:
-            possible_transitions = self.game.possible_transitions()
-            possible_transitions = [transition for transition in possible_transitions if transition not in self.visited]
-            if not possible_transitions:
-                self.game.game_over()
-                return
-            self.game.state = random.choice(possible_transitions)
-            self.visited.append(self.game.state)
-            print(f'Current state: {self.game.state}')
-            step += 1
-        self.game.game_over()
-
-    def initialize(self):
-        self.visited = [self.game.initial_state]
-        self.game.state = self.game.initial_state
