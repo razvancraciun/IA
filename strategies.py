@@ -1,12 +1,13 @@
 import random
 
 class IDDFS_Strategy:
-    def __init__(self, game, depth_step = 3):
+    def __init__(self, game, display, depth_step = 3):
         self.game = game
         self.visited = []
         self.parent = {}
         self.depth = {}
         self.depth_step = depth_step
+        self.display = display
 
     def initialize(self):
         self.game.reset()
@@ -23,8 +24,8 @@ class IDDFS_Strategy:
         while self.parent[state]:
             trace.append(state)
             state = self.parent[state]
-        for state in reversed(trace):
-            print(state)
+        trace.reverse()
+        self.display.display(trace)
         print(f'Solution passes through {len(trace)} states')
 
     def run(self):
@@ -57,10 +58,11 @@ class IDDFS_Strategy:
         return deep
 
 class Backtracking_Strategy:
-    def __init__(self, game):
+    def __init__(self, game, display):
         self.game = game
         self.visited = []
         self.parent = {}
+        self.display = display
 
     def run(self):
         self.initialize()
@@ -99,9 +101,10 @@ class Backtracking_Strategy:
         self.parent = {}
 
 class Random_Strategy:
-    def __init__(self, game):
+    def __init__(self, game, display):
         self.visited = []
         self.game = game
+        self.display = display
 
     def run(self):
         self.initialize()
@@ -122,3 +125,15 @@ class Random_Strategy:
     def initialize(self):
         self.game.reset()
         self.visited = [self.game.state]
+
+class Strategy:
+    random = 'random'
+    backtracking = 'bkt'
+    iddfs = 'iddfs'
+    def object(type, depth, game, display):
+        if type == Strategy.random:
+            return Random_Strategy(game, display)
+        if type == Strategy.backtracking:
+            return Backtracking_Strategy(game, display)
+        if type == Strategy.iddfs:
+            return IDDFS_Strategy(game, display, depth)
