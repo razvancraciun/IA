@@ -24,6 +24,7 @@ class IDDFS_Strategy:
         while self.parent[state]:
             trace.append(state)
             state = self.parent[state]
+        trace.append(self.game.initial_state)
         trace.reverse()
         self.display.display(trace)
         print(f'Solution passes through {len(trace)} states')
@@ -89,8 +90,9 @@ class Backtracking_Strategy:
         while self.parent[state]:
             trace.append(state)
             state = self.parent[state]
-        for state in reversed(trace):
-            print(state)
+        trace.append(self.game.initial_state)
+        trace.reverse()
+        self.display.display(trace)
         print(f'Solution passes through {len(trace)} states')
 
 
@@ -108,23 +110,27 @@ class Random_Strategy:
 
     def run(self):
         self.initialize()
-        print(f'Starting game. State: {self.game.state}')
         step = 0
         while not self.game.is_final_state() and step < 100:
             possible_transitions = self.game.possible_transitions()
             possible_transitions = [transition for transition in possible_transitions if transition not in self.visited]
             if not possible_transitions:
+                self.trace()
                 self.game.game_over()
                 return
             self.game.state = random.choice(possible_transitions)
             self.visited.append(self.game.state)
-            print(f'Current state: {self.game.state}')
             step += 1
+        self.trace()
         self.game.game_over()
 
     def initialize(self):
         self.game.reset()
         self.visited = [self.game.state]
+
+    def trace(self):
+        self.display.display(self.visited)
+        print(f'Solution passes through {len(self.visited)} states')
 
 class Strategy:
     random = 'random'

@@ -15,17 +15,17 @@ class GuiDisplay:
 
     def display(self,states):
         print('gui display not yet implemented')
-        window = tk.Tk()
-        window.title('Missionaries and Canibals')
-        window.geometry('800x800')
-        window.resizable(0,0)
-        c_img = ImageTk.PhotoImage(Image.open('img/cannibal.png'))
-        cannibal = tk.Label(window, image = c_img)
-        m_img = ImageTk.PhotoImage(Image.open('img/missionary.png'))
-        missionary = tk.Label(window, image = m_img)
-        cannibal.place(x=100, y= 100)
-        missionary.place(x=200, y= 200)
-        window.mainloop()
+        # window = tk.Tk()
+        # window.title('Missionaries and Canibals')
+        # window.geometry('800x800')
+        # window.resizable(0,0)
+        # c_img = ImageTk.PhotoImage(Image.open('img/cannibal.png'))
+        # cannibal = tk.Label(window, image = c_img)
+        # m_img = ImageTk.PhotoImage(Image.open('img/missionary.png'))
+        # missionary = tk.Label(window, image = m_img)
+        # cannibal.place(x=100, y= 100)
+        # missionary.place(x=200, y= 200)
+        # window.mainloop()
 
 class Display:
     console = 'console'
