@@ -58,9 +58,3 @@ class Missionaries_and_canibals:
 
     def reset(self):
         self.state = self.initial_state
-
-    def game_over(self):
-        if self.state == self.final_state:
-            print('You win!')
-        else:
-            print('You lose')
