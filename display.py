@@ -1,4 +1,4 @@
-import tkinter as tk
+# import tkinter as tk
 # from PIL import ImageTk, Image
 
 class ConsoleDisplay:
